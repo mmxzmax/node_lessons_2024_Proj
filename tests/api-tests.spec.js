@@ -35,7 +35,7 @@ describe('api', () => {
 
     test('should create course', async function () {
         const response = await request(app)
-            .put('/api/courses/create').send({
+            .post('/api/courses/create').send({
                 title: 'some title',
                 description: 'some description',
                 materials: [],
@@ -54,7 +54,7 @@ describe('api', () => {
 
     test('should edit course by Id', async function () {
         const response = await request(app)
-            .patch('/api/courses/1').send({
+            .put('/api/courses/1').send({
                 title: 'some title',
                 description: 'some description',
                 materials: [],
@@ -73,7 +73,7 @@ describe('api', () => {
 
     test('should sent course comment', async function () {
         const response = await request(app)
-            .put('/api/courses/1/comments').send({
+            .post('/api/courses/1/comments').send({
                 authorId: 10,
                 comment: 'some comment'
             }).set('Accept', 'application/json');
@@ -90,7 +90,7 @@ describe('api', () => {
 
     test('should create material', async function () {
         const response = await request(app)
-            .put('/api/materials').send({
+            .post('/api/materials').send({
                 title: '',
                 content: '',
                 media: [{
@@ -104,7 +104,7 @@ describe('api', () => {
 
     test('should edit material', async function () {
         const response = await request(app)
-            .patch('/api/materials/1').send({
+            .put('/api/materials/1').send({
                 title: '',
                 content: '',
                 media: [{
@@ -133,7 +133,7 @@ describe('api', () => {
 
     test('should create  user', async function () {
         const response = await request(app)
-            .put('/api/users/').send({login: '', email: '', userType: 1}).set('Accept', 'application/json');
+            .post('/api/users/').send({login: '', email: '', userType: 1}).set('Accept', 'application/json');
         expect(response?.status).toEqual(200);
         expect(response?.headers["Content-Type"]).toMatch(/json/);
     });
@@ -147,7 +147,7 @@ describe('api', () => {
 
     test('should edit user', async function () {
         const response = await request(app)
-            .patch('/api/users/1').send({login: '', email: '', userType: 1}).set('Accept', 'application/json');
+            .put('/api/users/1').send({login: '', email: '', userType: 1}).set('Accept', 'application/json');
         expect(response?.status).toEqual(200);
         expect(response?.headers["Content-Type"]).toMatch(/json/);
     });
