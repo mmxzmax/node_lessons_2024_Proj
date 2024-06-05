@@ -3,7 +3,7 @@ classDiagram
     Materials <|-- Media
     Courses <|-- Materials
     Courses <|-- Comments
-    Courses <|-- Users
+    Users <|-- Courses
     Comments <|-- Users
     class Media {
         int id
@@ -20,7 +20,6 @@ classDiagram
         String title
         String description
         int[] materials
-        int[] users
     }
     class Comments{
         int id
@@ -35,6 +34,7 @@ classDiagram
         String email
         String pass
         String role
+        int[] courses
     }
 ```
   
