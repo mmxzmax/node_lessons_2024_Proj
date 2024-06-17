@@ -193,6 +193,8 @@ const config = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
+
+  preset: '@shelf/jest-mongodb',
 };
 
 module.exports = config;

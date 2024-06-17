@@ -10,3 +10,4 @@ test.db
 .mvn
 node_modules
 coverage
+*.env
