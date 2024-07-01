@@ -3,11 +3,31 @@ var express = require('express');
 var path = require('node:path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const WebSocket = require('ws');
 
 var indexRouter = require('./routes/index');
 var apiRouter = require('./routes/api');
 
 var app = express();
+
+// Initialize WebSocket server
+const wss = new WebSocket.Server({ port: 8080 });
+wss.on('connection', (ws) => {
+  console.log('A new client connected.');
+  // Event listener for incoming messages
+  ws.on('message', (message) => {
+    const data = JSON.parse(message.toString())
+    wss.clients.forEach((client) => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(data.body);
+      }
+    });
+  });
+
+  ws.on('close', () => {
+    console.log('A client disconnected.');
+  });
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
