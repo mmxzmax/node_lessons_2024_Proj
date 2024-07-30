@@ -1,8 +1,15 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-module.exports = mongoose.model('Course', new Schema({
+export type CourseItem = {
+    title:string,
+    description:string,
+    materials:string[],
+    comments:string[]
+}
+
+export default mongoose.model('Course', new Schema({
     title:String,
     description:String,
     materials:[{type: Schema.Types.ObjectId, ref: 'Material'}],

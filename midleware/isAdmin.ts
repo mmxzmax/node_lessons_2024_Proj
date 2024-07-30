@@ -1,10 +1,11 @@
-const db = require('../db/db');
+import db from '../db/db';
+import {NextFunction, Request, Response} from "express";
 
-function checkAdmin(req, res, next) {
+function checkAdmin(req: Request, res: Response, next: NextFunction) {
     try {
-        const id = req?.userId;
+        const id = req.body?.userId;
         db.getUserById(id).then(user => {
-            if(user.role === 'admin') {
+            if(user && user.role === 'admin') {
                 next();
             } else {
                 res.status(401).json({error: 'Access denied'});
@@ -15,4 +16,4 @@ function checkAdmin(req, res, next) {
     }
 }
 
-module.exports = checkAdmin;
+export default checkAdmin;
